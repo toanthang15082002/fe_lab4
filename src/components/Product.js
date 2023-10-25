@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import "bootstrap/dist/css/bootstrap.css";
 import { Container, Row, Table } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 export default function Production() {
   const [products, setProducts] = useState([]);
@@ -9,11 +10,11 @@ export default function Production() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const result = await axios.get('http://localhost:9999/products');
+        const result = await axios.get("http://localhost:9999/products");
         setProducts(result.data.data);
         console.log(result.data.data);
       } catch (error) {
-        console.log('🚀 ========= error:', error);
+        console.log("🚀 ========= error:", error);
       }
     };
     fetchData();
@@ -37,8 +38,10 @@ export default function Production() {
           </thead>
           <tbody>
             {products.map((product, index) => (
-              <tr key={index} onClick={(e) => e.target.value}>
-                <td>{product.name}</td>
+              <tr key={index}>
+                <td>
+                  <Link to={`/product/${product?._id}`}>{product.name}</Link>
+                </td>
                 <td>{product.description}</td>
                 <td>{product.price}</td>
                 <td>{product.discountPercentage}</td>
@@ -52,6 +55,5 @@ export default function Production() {
         </Table>
       </Row>
     </Container>
-
   );
 }
