@@ -31,9 +31,49 @@ export default function ProductDetail() {
       <p>Brand: {products?.brand}</p>
       <p>Thumbnail: {products?.thumbnail}</p>
       <p>Image: {products?.images}</p>
-      {products?.comment?.map((comment, index) => (
-        <p key={index}>Comment {index+1}: {comment?.title + " " + comment?.body}</p>
-      ))}
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Title</th>
+            <th scope="col">Body</th>
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          {products?.comment?.map((comment, index) => (
+            <tr key={index}>
+              <th scope="row">{index}</th>
+              <td>{comment?.title}</td>
+              <td>{comment?.body}</td>
+              <td>Delete Edit</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+      <form>
+        <div className="form-group">
+          <label htmlFor="comment">Comment</label>
+          <input
+            type="text"
+            className="form-control"
+            id="comment"
+            placeholder="Enter comment"
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="userId">User Id</label>
+          <input
+            type="text"
+            className="form-control"
+            id="userId"
+            placeholder="Enter userId"
+          />
+        </div>
+        <button type="submit" className="btn btn-primary">
+          Submit
+        </button>
+      </form>
     </Container>
   );
 }
