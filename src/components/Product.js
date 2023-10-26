@@ -50,6 +50,7 @@ export default function Production() {
                 <td>{product?.brand}</td>
                 <td>{product?.thumbnail}</td>
                 <td>{product?.images}</td>
+                <td><Link>Add to cart </Link></td>
               </tr>
             ))}
           </tbody>
