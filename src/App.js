@@ -10,6 +10,7 @@ import ProductDetail from "./components/ProductDetail";
 import AddUser from "./components/AddUser";
 import Comment from "./components/Comment";
 import Login from "./components/Login";
+import AddCart from "./components/AddCart";
 
 function App() {
   return (
@@ -39,6 +40,7 @@ function App() {
         <Route path="/adduser" element={<AddUser />}></Route>
         <Route path="/addproduct" element={<AddProduct />}></Route>
         <Route path="/cart" element={<Cart />}></Route>
+        <Route path="/addcart" element={<AddCart />}></Route>
         {/* <Route path="/login" element={<Login />}></Route> */}
       </Routes>
     </Router>
