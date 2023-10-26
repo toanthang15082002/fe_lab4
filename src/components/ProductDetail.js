@@ -31,7 +31,9 @@ export default function ProductDetail() {
       <p>Brand: {products?.brand}</p>
       <p>Thumbnail: {products?.thumbnail}</p>
       <p>Image: {products?.images}</p>
-      <Link to={`/product/${products?._id}/comment`}><Button>Comments</Button></Link>
+      <Link to={`/product/${products?._id}/comment`}>
+        <Button>Comments</Button>
+      </Link>
     </Container>
   );
 }

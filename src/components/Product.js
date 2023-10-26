@@ -1,7 +1,15 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import "bootstrap/dist/css/bootstrap.css";
-import { Button, Container, Dropdown, Form, Modal, Row, Table } from "react-bootstrap";
+import {
+  Button,
+  Container,
+  Dropdown,
+  Form,
+  Modal,
+  Row,
+  Table,
+} from "react-bootstrap";
 import { Link } from "react-router-dom";
 
 export default function Production() {
@@ -16,7 +24,7 @@ export default function Production() {
       try {
         const result = await axios.get("http://localhost:9999/products");
         setProducts(result?.data?.data);
-        console.log(result?.data?.data);
+        console.log("data", result?.data?.data);
       } catch (error) {
         console.log("🚀 ========= error:", error);
       }
@@ -27,8 +35,8 @@ export default function Production() {
     const fetchCarts = async () => {
       try {
         const result = await axios.get("http://localhost:9999/carts");
+        console.log("🚀 ========= result:", result);
         setCarts(result?.data?.data);
-
       } catch (error) {
         console.log("🚀 ========= error:", error);
       }
@@ -37,9 +45,9 @@ export default function Production() {
   }, []);
 
   const handleAddToCart = (productID) => {
-    setProductID(productID)
-    setSelectedCart("");
-    setQuantity(1)
+    setProductID(productID);
+    // setSelectedCart("");
+    // setQuantity(1);
     setShowModal(true);
   };
 
@@ -55,13 +63,15 @@ export default function Production() {
 
   const handleAddProductToCart = async () => {
     try {
-      const requestData = {
+      const result = await axios.put(`http://localhost:9999/carts`, {
         productId: productID,
         cartId: selectedCart,
-        quantity: quantity,
-      };
-      console.log(requestData);
-      await axios.put(`http://localhost:9999/carts`, {requestData});
+        quantity,
+      });
+      console.log("🚀 ========= quantity:", quantity);
+      console.log("🚀 ========= selectedCart:", selectedCart);
+      console.log("🚀 ========= productID:", productID);
+      console.log("🚀 ========= result:", result);
 
       setShowModal(false);
     } catch (error) {
@@ -69,11 +79,12 @@ export default function Production() {
     }
   };
 
-
   return (
     <Container>
       <Row>
-        <Link to="/addproduct"><Button>Add Product</Button></Link>
+        <Link to="/addproduct">
+          <Button>Add Product</Button>
+        </Link>
         <Table striped bordered hover>
           <thead>
             <tr>
@@ -102,7 +113,11 @@ export default function Production() {
                 <td>{product?.brand}</td>
                 <td>{product?.thumbnail}</td>
                 <td>{product?.images}</td>
-                <td><Button onClick={() => handleAddToCart(product?._id)}>Add to cart</Button></td>
+                <td>
+                  <Button onClick={() => handleAddToCart(product?._id)}>
+                    Add to cart
+                  </Button>
+                </td>
               </tr>
             ))}
           </tbody>
@@ -122,7 +137,10 @@ export default function Production() {
                 </Dropdown.Toggle>
                 <Dropdown.Menu>
                   {carts.map((cart) => (
-                    <Dropdown.Item key={cart._id} onClick={() => handleCartSelection(cart._id)}>
+                    <Dropdown.Item
+                      key={cart._id}
+                      onClick={() => handleCartSelection(cart._id)}
+                    >
                       {cart._id}
                     </Dropdown.Item>
                   ))}
