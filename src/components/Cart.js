@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import "bootstrap/dist/css/bootstrap.css";
 import { Container, Row, Table } from "react-bootstrap";
+import "bootstrap/dist/css/bootstrap.css";
 
 export default function Cart() {
   const [cart, setCart] = useState([]);
@@ -9,11 +9,11 @@ export default function Cart() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const result = await axios.get('http://localhost:9999/carts');
-        setCart(result.data.data);
-        console.log(result.data.data);
+        const result = await axios.get("http://localhost:9999/carts");
+        setCart(result?.data?.data);
+        console.log(result?.data?.data);
       } catch (error) {
-        console.log('🚀 ========= error:', error);
+        console.log("🚀 ========= error:", error);
       }
     };
     fetchData();
@@ -34,20 +34,25 @@ export default function Cart() {
             </tr>
           </thead>
           <tbody>
-            {cart.map((cart, index) => (
+            {cart?.map((cart, index) => (
               <tr key={index}>
-                <td>{cart.discountTotal}</td>
-                <td>{cart.totalProduct}</td>
-                <td>{cart.totalQuantity}</td>
-                <td>{cart.totalPrice}</td>
-                <td>{cart.user}</td>
-                <td>{cart.product}</td>
+                <td>{cart?.discountTotal}</td>
+                <td>{cart?.totalProduct}</td>
+                <td>{cart?.totalQuantity}</td>
+                <td>{cart?.totalPrice}</td>
+                <td>{cart?.user}</td>
+                <td>
+                  {cart?.product?.map((item) => (
+                    <span key={item?._id} className="mr-4">
+                      {item?.name}
+                    </span>
+                  ))}
+                </td>
               </tr>
             ))}
           </tbody>
         </Table>
       </Row>
     </Container>
-
   );
 }
