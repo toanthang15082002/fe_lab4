@@ -7,6 +7,7 @@ import Home from "./components/Home";
 import { Button, Container, Row } from "react-bootstrap";
 import Cart from "./components/Cart";
 import ProductDetail from "./components/ProductDetail";
+import AddUser from "./components/AddUser";
 
 function App() {
   return (
@@ -30,6 +31,8 @@ function App() {
         <Route path="/product/:id" element={<ProductDetail />}></Route>
         {/*<Route path="/product/add" element={<AddProduct />}></Route> */}
         <Route path="/user" element={<User />}></Route>
+        <Route path="/adduser" element={<AddUser />}></Route>
+        <Route path="/addproduct" element={<AddProduct />}></Route>
         <Route path="/cart" element={<Cart />}></Route>
       </Routes>
     </Router>

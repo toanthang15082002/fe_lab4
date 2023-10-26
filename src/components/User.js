@@ -1,7 +1,8 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { Container, Row } from 'react-bootstrap';
+import { Button, Container, Row } from 'react-bootstrap';
 import Table from 'react-bootstrap/Table';
+import { Link } from 'react-router-dom';
 
 export default function User() {
   const [users, setUsers] = useState([]);
@@ -22,6 +23,7 @@ export default function User() {
   return (
     <Container>
       <Row>
+      <Link to="/adduser"><Button>Add User</Button></Link>
         <Table striped bordered hover>
           <thead>
             <tr>
@@ -33,7 +35,7 @@ export default function User() {
           <tbody>
             {users.map((user, index) => (
               <tr key={index}>
-                <td>{user.username}</td>
+                <td><Link to={`/cart/${user?._id}`}>{user?.username}</Link></td>
                 <td>{user.email}</td>
                 <td>{user.password}</td>
               </tr>

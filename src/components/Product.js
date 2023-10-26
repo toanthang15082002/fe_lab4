@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import "bootstrap/dist/css/bootstrap.css";
-import { Container, Row, Table } from "react-bootstrap";
+import { Button, Container, Row, Table } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
 export default function Production() {
@@ -11,8 +11,8 @@ export default function Production() {
     const fetchData = async () => {
       try {
         const result = await axios.get("http://localhost:9999/products");
-        setProducts(result.data.data);
-        console.log(result.data.data);
+        setProducts(result?.data?.data);
+        console.log(result?.data?.data);
       } catch (error) {
         console.log("🚀 ========= error:", error);
       }
@@ -23,6 +23,7 @@ export default function Production() {
   return (
     <Container>
       <Row>
+      <Link to="/addproduct"><Button>Add Product</Button></Link>
         <Table striped bordered hover>
           <thead>
             <tr>
@@ -37,18 +38,18 @@ export default function Production() {
             </tr>
           </thead>
           <tbody>
-            {products.map((product, index) => (
+            {products?.map((product, index) => (
               <tr key={index}>
                 <td>
-                  <Link to={`/product/${product?._id}`}>{product.name}</Link>
+                  <Link to={`/product/${product?._id}`}>{product?.name}</Link>
                 </td>
-                <td>{product.description}</td>
-                <td>{product.price}</td>
-                <td>{product.discountPercentage}</td>
-                <td>{product.stock}</td>
-                <td>{product.brand}</td>
-                <td>{product.thumbnail}</td>
-                <td>{product.images}</td>
+                <td>{product?.description}</td>
+                <td>{product?.price}</td>
+                <td>{product?.discountPercentage}%</td>
+                <td>{product?.stock}</td>
+                <td>{product?.brand}</td>
+                <td>{product?.thumbnail}</td>
+                <td>{product?.images}</td>
               </tr>
             ))}
           </tbody>
