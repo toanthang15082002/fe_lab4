@@ -27,6 +27,7 @@ export default function Production() {
         <Table striped bordered hover>
           <thead>
             <tr>
+              <th>Product ID</th>
               <th>Name</th>
               <th>Description</th>
               <th>Price</th>
@@ -40,6 +41,7 @@ export default function Production() {
           <tbody>
             {products?.map((product, index) => (
               <tr key={index}>
+                <td>{product?._id}</td>
                 <td>
                   <Link to={`/product/${product?._id}`}>{product?.name}</Link>
                 </td>

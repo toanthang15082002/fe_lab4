@@ -27,6 +27,7 @@ export default function User() {
         <Table striped bordered hover>
           <thead>
             <tr>
+              <th>ID</th>
               <th>Name</th>
               <th>Email</th>
               <th>Password</th>
@@ -35,7 +36,8 @@ export default function User() {
           <tbody>
             {users.map((user, index) => (
               <tr key={index}>
-                <td><Link to={`/cart/${user?._id}`}>{user?.username}</Link></td>
+                <td>{user._id}</td>
+                <td>{user?.username}</td>
                 <td>{user.email}</td>
                 <td>{user.password}</td>
               </tr>
