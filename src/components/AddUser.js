@@ -23,6 +23,11 @@ export default function AddUser() {
     try {
       const result = await axios.post("http://localhost:9999/users", formData);
       console.log("🚀 ========= result:", result?.data?.data);
+      setFormData({
+        username: "",
+        email: "",
+        password: ""
+      })
     } catch (error) {
       console.log("🚀 ========= error:", error);
     }

@@ -31,6 +31,16 @@ export default function AddProduct() {
     try {
       const result = await axios.post("http://localhost:9999/products", formData);
       console.log("🚀 ========= result:", result?.data?.data);
+      setFormData({
+        name: "",
+        description: "",
+        price: 0,
+        discountPercentage: 0,
+        stock: 0,
+        brand: "",
+        thumbnail: "",
+        // image: "",
+      })
     } catch (error) {
       console.log("🚀 ========= error:", error);
     }
